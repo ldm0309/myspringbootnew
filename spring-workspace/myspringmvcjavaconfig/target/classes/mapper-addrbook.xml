@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper-addrbook">
+	<select id="getDBList"
+		resultType="lx.edu.springmvc.vo.AddrBookVO">
+		select AB_ID abId
+		,AB_NAME abName 
+		,ab_email abEmail
+		,ab_comdept abComdept
+		,ab_birth abBirth
+		,ab_tel abTel
+		,ab_memo abMemo
+		from addrbook
+	</select>
+	<!-- public boolean insertDB(AddrBookVO ab) throws Exception { -->
+	<insert id="insertDB"
+		parameterType="lx.edu.springmvc.vo.AddrBookVO">
+		insert into addrbook(ab_name, ab_email, ab_comdept,
+		ab_birth, ab_tel, ab_memo)
+		values(#{abName}, #{abEmail}, #{abComdept},
+		#{abBirth}, #{abTel}, #{abMemo})
+	</insert>
+	
+	<!-- getDB, updateDB 쿼리 추가 (에딧과제) -->
+	<select id="getDB" parameterType="int" resultType="lx.edu.springmvc.vo.AddrBookVO">
+		SELECT
+			ab_id as abId,
+			ab_name as abName,
+			ab_email as abEmail,
+			ab_tel as abTel,
+			ab_birth as abBirth,
+			ab_comdept as abComdept,
+			ab_memo as abMemo
+		FROM
+			addrbook
+		WHERE
+			ab_id = #{abId}
+	</select>
+	<update id="updateDB" parameterType="lx.edu.springmvc.vo.AddrBookVO">
+		UPDATE
+			addrbook
+		SET
+			ab_name = #{abName},
+			ab_email = #{abEmail},
+			ab_tel = #{abTel},
+			ab_birth = #{abBirth},
+			ab_comdept = #{abComdept},
+			ab_memo = #{abMemo}
+		WHERE
+			ab_id = #{abId}
+	</update>
+	
+</mapper>
